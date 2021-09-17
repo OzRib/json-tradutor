@@ -23,3 +23,5 @@ def catch_output():
 
 output = catch_output()
 print(output)
+
+browser.quit()
