@@ -1,5 +1,6 @@
 import sys
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 
 ARGS = sys.argv
@@ -21,7 +22,14 @@ def catch_output():
     translated_output = translated_father.find_element_by_tag_name('span')
     return translated_output.text
 
-output = catch_output()
-print(output)
+loaded = False
+
+while loaded != True:
+    try:
+        output = catch_output()
+        print(output)
+        loaded = True
+    except NoSuchElementException:
+        pass
 
 browser.quit()
