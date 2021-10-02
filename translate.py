@@ -17,10 +17,18 @@ input_field = browser.find_element_by_class_name('er8xn')
 input_field.send_keys(to_translate)
 
 def catch_output():
-    # JLqJ4b is the father component of the result
-    translated_father = browser.find_element_by_class_name('JLqJ4b')
-    translated_output = translated_father.find_element_by_tag_name('span')
-    return translated_output.text
+    # Gender word variations
+    try:
+        # JLqJ4b is the father component of the result
+        translated_father = browser.find_element_by_class_name('JLqJ4b')
+        translated_output = translated_father.find_element_by_tag_name('span')
+
+        return translated_output.text
+    except NoSuchElementException:
+        # VIiyi is the variation gender container
+        translated_output = browser.find_element_by_class_name('VIiyi');
+
+        return translated_output.text
 
 loaded = False
 
