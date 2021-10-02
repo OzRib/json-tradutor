@@ -6,8 +6,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 ARGS = sys.argv
 to_translate = ARGS[1]
 
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+
 path = ChromeDriverManager().install()
-browser = webdriver.Chrome(executable_path=path)
+browser = webdriver.Chrome(executable_path=path, chrome_options=options)
 browser.get('https://translate.google.pt')
 
 # er8xn is the input textarea
