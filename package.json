@@ -1,0 +1,17 @@
+{
+  "name": "json-tradutor",
+  "version": "1.0.0",
+  "description": "A json tradutor with python and nodejs",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "author": "Ozeias Ribeiro",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "shell-escape": "^0.2.0",
+    "shelljs": "^0.8.4"
+  }
+}
