@@ -15,6 +15,15 @@ function execShellCommand(cmd){
   });
 }
 
+async function translateString(toTranslate){
+  const escapedString = shellescape([toTranslate]);
+  const request = `python translate.py ${escapedString}`;
+
+  const response = await execShellCommand(request);
+
+  return response;
+}
+
 async function main(){
 }
 main();
