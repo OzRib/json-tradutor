@@ -69,5 +69,48 @@ async function translateString(toTranslate){
 }
 
 async function main(){
+  let result;
+  const json = getJson();
+
+  const possiblesActions = {
+    string: async () => {
+      return await translateString(json);
+    },
+    object: async () => {
+      async function performInObject(object, callback){
+        for(let key in object){
+          const toTranslate = object[key];
+
+          if(typeof(toTranslate) === 'object')
+            await performInObject(toTranslate, callback);
+
+          else if(typeof(toTranslate) === 'string')
+            object[key] = await callback(toTranslate);
+        }
+
+        return object;
+      }
+
+      await performInObject(Object.assign(json), function(toTranslate){
+        countToTranslate++;
+        return toTranslate;
+      });
+
+      const translatedJson = await performInObject(Object.assign(json), async function(toTranslate){
+        const translatedString = await translateString(toTranslate);
+        translatedStrings++;
+        return translatedString;
+      });
+
+      return translatedJson;
+    }
+  }
+
+  const typeofJson = typeof(json);
+  const action = possiblesActions[typeofJson];
+
+  result = action? await action(): json;
+
+  console.log(result);
 }
 main();
