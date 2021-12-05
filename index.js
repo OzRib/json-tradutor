@@ -121,6 +121,6 @@ async function main(){
   result = action? await action(): json;
 
   logger();
-  console.log(result);
+  console.log(JSON.stringify(result, null, '  '));
 }
 main();
