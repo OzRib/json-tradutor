@@ -38,7 +38,7 @@ loaded = False
 while loaded != True:
     try:
         output = catch_output()
-        print(output)
+        print(output, end='')
         loaded = True
     except NoSuchElementException:
         pass
