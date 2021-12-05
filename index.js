@@ -71,6 +71,14 @@ async function translateString(toTranslate){
 async function main(){
   let result;
   const json = getJson();
+  let countToTranslate = 0;
+  let translatedStrings = 0;
+
+  function logger(){
+    console.clear();
+    console.log(`${countToTranslate} ${countToTranslate < 2? 'string': 'strings'} to translate`);
+    console.log(`Done: ${translatedStrings}/${countToTranslate}`);
+  }
 
   const possiblesActions = {
     string: async () => {
@@ -97,6 +105,7 @@ async function main(){
       });
 
       const translatedJson = await performInObject(Object.assign(json), async function(toTranslate){
+        logger();
         const translatedString = await translateString(toTranslate);
         translatedStrings++;
         return translatedString;
@@ -111,6 +120,7 @@ async function main(){
 
   result = action? await action(): json;
 
+  logger();
   console.log(result);
 }
 main();
